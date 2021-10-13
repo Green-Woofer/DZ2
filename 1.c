@@ -8,58 +8,62 @@
 #pragma warning(disable : 4996)
 
 int main()
-{	
-	system("chcp 1251");        // добавляем поддержку русской раскладки
-	system("cls");				// очищаем консоль
-	char current;				// текущий введенный символ
-	int k = 1;					// счётчик для выделения памяти	
-	int i, j, n, length = 0;	// n - количество узлов, length - количество рёбер
-	int full;                   // определяет единицы в получившейся матрице для записи в файл 
-	FILE* file;					// указатель на файл
+{
+	system("chcp 1251");        
+	system("cls");				
+	char cc;				
+	int k = 1;						
+	int i;
+	int j;
+	int n;
+	int length = 0;	// n - количество узлов, length - количество рёбер
+	int ones_in_column;                   
+	FILE* file;					
 	int sum = 1;
 
-//--------------------------------------------------------------//
-//				  Ввод динамической матрицы						//
-//--------------------------------------------------------------//
-	printf("Введите количество узлов: ");	
-	scanf_s("%d", &n);			// количество узлов
-	int* flag = (int*)malloc(n * sizeof(int));		// выделение памяти под массив флагов для определения связности
-	int** a = (int**)malloc(n * sizeof(int*));		// выделение памяти под массив строк
-	for (int arr = 0; arr < n; arr++)				// выделяем по одной ячейке помяти размером int в каждой строке
+	
+	//				  Ввод матрицы
+	printf("Введите количество узлов: ");
+	scanf_s("%d", &n);	
+
+			
+	int** a = (int**)malloc(n * sizeof(int*));		
+	for (int arr = 0; arr < n; arr++)				
 	{
-		a[arr] = (int*)malloc(sizeof(int));	
+		a[arr] = (int*)malloc(sizeof(int));
 	}
-	current = getchar();									// переход на новую строку после ввода количества узлов
+	cc = getchar();									
 	for (i = 0; i < n; i++)
 	{
 		printf("%d  : ", i);
-		current = getchar();								// берём первый символ
-		for (j = 0; current != '\n'; j++)					// читаем с клавиатуры до конца строки
+		cc = getchar();								
+		for (j = 0; cc != '\n'; j++)					
 		{
-			if ((current == '1') || (current == '0'))		// если 0 или 1
+			if ((cc == '1') || (cc == '0'))		
 			{
-				a[i] = (int*)realloc(a[i], sizeof(int) * k);// довыделяем память на один больше (в начале int k = 1)
-				(a[i])[k - 1] = (int)current - '0';			// записываем значение в ячёку массива
-				++k;										//инк. счетчик для веделения памяти
+				a[i] = (int*)realloc(a[i], sizeof(int) * k);
+				(a[i])[k - 1] = (int)cc - '0';			
+				k++;										
 			}
-			current = getchar();	// получаем новое значение	
+			cc = getchar();	
 		}
-		current = '\0';				// для перехода на новую строку возвращаем переменные к исх. виду
-		length = k - 1;				// length - длина строк
-		k = 1;						// присваиваем int к начальное значение
+		cc = '\0';				
+		length = k - 1;				
+		k = 1;						
 	}
-	printf("\n\n"); 
-//--------------------------------------------------------------//
-//					   Вывод  в консоль						    //
-//--------------------------------------------------------------//
+	printf("\n\n");
+	
+	//Вывод  в консоль
 
 	printf("\n\n   ");
-	for (j = 1; j <= length; j++)
+	printf(" ");
+	for (int lit = 'a'; lit < length + 'a'; lit++)
 	{
-		printf("%3i", j);
+		
+		printf("  %c", lit);
 	}
 	printf("\n");
-	for (j = 1; j <= ((3 * length) + 7); j++)
+	for (j = 1; j <= ((3 * length) + 8); j++)
 	{
 		printf("-");
 	}
@@ -67,38 +71,38 @@ int main()
 
 	for (i = 0; i < n; i++)
 	{
-		printf("%i| ",(i+1));
+		printf("%i| ", (i + 1));
 		for (j = 0; j < length; j++)
 		{
 			printf("%3d", a[i][j]);
 		}
 		printf("\n");
 	}
-//--------------------------------------------------------------//
-//					Проверка на связность						//
-//--------------------------------------------------------------//
-
+	
+	//связность
+	
+	int* flag = (int*)malloc(n * sizeof(int));
 	flag[0] = 1;
 	for (i = 1; i < n; i++)
 		flag[i] = 0;
 	for (i = 0; i < n; i++)
 	{
-		//printf("сейчас обрабатывается строка %d \n", i);
+		
 		if (flag[i] == 1)
 		{
-			//printf("строка %d имеет флаг \n", i);
+			
 			for (j = 0; j < n; j++)
 			{
 				if (flag[j] != 1)
 				{
-					//printf(" основная строка %d сравнивается со строкой %d \n", i, j);
+					
 					for (int m = 0; m < length; m++)
 					{
 						if ((a[i][m] == 1) && (a[j][m] == 1))
 						{
 							flag[j] = 1;
 							sum++;
-							//printf("сейчас сумма %d \n", sum);
+							
 							break;
 						}
 					}
@@ -111,72 +115,67 @@ int main()
 	else printf("Граф не связан");
 
 
-//--------------------------------------------------------------//
-//					  Работа с dot файлом						//
-//--------------------------------------------------------------//
-	if ((file = fopen("Dot_file.txt", "w")) == NULL) {		// открыли файл Dot_file.txt для записи
-		printf("Cannot open file.\n");						// если ошибка, то печатаем ошибку
-		exit(1);											// завершаем программу
+	
+	// Работа с dot файлом
+	
+	if ((file = fopen("Dot_file.txt", "w")) == NULL) {		
+		printf("Cannot open file.\n");						
+		exit(1);											
 	}
-	fprintf(file,"graph G{\n");				// заполняем файл на языке dot
+	fprintf(file, "graph G{\n");				
 
 
-	int t = -1;							    // индекс первой встретившийся единицы
-	full = 0;								// индекс количества единиц
-	for (j = 0; j < length; j++)			// цикл по столбцам
+	int t = -1;							    
+	ones_in_column = 0;
+	for (j = 0; j < length; j++)			
 	{
-		for (i = 0; i < n; i++)				// цикл по строкам
+		for (i = 0; i < n; i++)				
 		{
-			if ((a[i][j] == 1) && (full > 2))                         // если в одном столбце две 1, то печатаем ошибку, т.к. это
-																	  //	противоречит определению матрицы инцидентности
+			if ((a[i][j] == 1) && (ones_in_column > 2))
+																	  
 			{
 				printf("Нельзя вводить больше 2 единицы в столбце");
 				exit(-1);
 			}
 			else
 			{
-				if ((a[i][j] == 1) && (full == 0))   // изначально full = 0;
+				if ((a[i][j] == 1) && (ones_in_column == 0))
 				{
-					fprintf(file, "%d", (i + 1));	 // если нашли первыую единицу в столбце, то записываем в файл
+					fprintf(file, "%d", (i + 1));	 
 					fprintf(file, " -- ");
-					full++;							 // инк. full для поиска второй единицы
-					t = i;							 // индекс первой единицы равен i
+					ones_in_column++;
+					t = i;							 
 				}
 				else
 				{
-					if ((a[i][j] == 1) && (full == 1))   // если нашли еще единицу и уже была единица (full = 1)
+					if ((a[i][j] == 1) && (ones_in_column == 1))
 					{
-						fprintf(file, "%d", (i + 1));	 // печатаем в соответствии с форматом
-						fprintf(file, " [label=%d];\n", (j + 1));
-						full++;
+						fprintf(file, "%d", (i + 1));	 
+						fprintf(file, " [label=%c];\n", (('a' - 1) + j + 1));
+						ones_in_column++;
 					}
 				}
 			}
 		}
-		if (full = 1)						// если встретилась только одна единица в столбце то значит вершина замкнута сама на себя
+		if (ones_in_column == 1)
 		{
-			fprintf(file, "%d", (t + 1));   // печатаем её же
-			fprintf(file, ";\n");
+			fprintf(file, "%d", (t + 1));   
+			fprintf(file, " [label=%c];\n", (('a' - 1) + t + 1));
 		}
-		full = 0;			// обнуляем счётчики для анализа всл. столбца
-		t = -1;			
+		ones_in_column = 0;
+		t = -1;
 	}
-	fprintf(file,"}");		
-	fclose(file);		// закрываем файл
-	system("dot C:\\Projects\\DZ2\\Dot_file.txt -Tbmp -o Dot_file.bmp");	// вызываем dot и передаем ему записанный 
-	                                                                                                    // файл Dot_file.txt и полученный граф сохраняем в Dot_file.bmp 
-
+	fprintf(file, "}");
+	fclose(file);		
+	system("dot C:\\Projects\\DZ2\\Dot_file.txt -Tbmp -o Dot_file.bmp");	
 	system("rundll32  \"%ProgramFiles%\\Windows Photo Viewer\\PhotoViewer.dll\", ImageView_Fullscreen C:\\Projects\\DZ2\\Dot_file.bmp");
-																				// запускаем встроенный просмотр фото в винде
+	
 
-//--------------------------------------------------------------//
-//                     Очистка памяти                           //
-//--------------------------------------------------------------//
-	for (i = 0; i < n; i++) // проходим по массиву строк и очищаем его
+	for (i = 0; i < n; i++) 
 	{
-		free(a[i]); 
+		free(a[i]);
 	}
-	free(a);				// очищаем весь двумерный массив
+	free(a);				
 	getchar();
 	return 0;
 }
