@@ -8,7 +8,6 @@
 
 int main()
 {
-<<<<<<< HEAD
 	system("chcp 1251");
 	system("cls");
 	char cc;
@@ -19,22 +18,6 @@ int main()
 	FILE* file;
 	int sum = 1;
 
-=======
-	system("chcp 1251");        
-	system("cls");				
-	char cc;				
-	int k = 1;						
-	int n;
-	int length = 0;	//n - height, length - length
-	int ones_in_column;                   
-	FILE* file;					
-	int sum = 1;
-
-	
-	//			Input
-	printf("Enter number of dots: ");
-	scanf_s("%d", &n);	
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 
 	//			Input
 	printf("Enter number of dots: ");
@@ -46,11 +29,7 @@ int main()
 	{
 		a[arr] = (int*)malloc(sizeof(int));
 	}
-<<<<<<< HEAD
-	cc = getchar();
-=======
 	cc = getchar();									
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 	for (int i = 0; i < n; i++)
 	{
 		printf("%d  : ", i);
@@ -70,11 +49,6 @@ int main()
 		k = 1;
 	}
 	printf("\n\n");
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 	//Output the table
 
 	printf("\n\n   ");
@@ -100,15 +74,9 @@ int main()
 		}
 		printf("\n");
 	}
-<<<<<<< HEAD
 
 	//examine for connection
-
-=======
 	
-	//examine for connection
-	
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 	int* flag = (int*)malloc(n * sizeof(int));
 	flag[0] = 1;
 	for (int i = 1; i < n; i++)
@@ -118,11 +86,6 @@ int main()
 
 		if (flag[i] == 1)
 		{
-<<<<<<< HEAD
-
-=======
-			
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 			for (int j = 0; j < n; j++)
 			{
 				if (flag[j] != 1)
@@ -145,34 +108,17 @@ int main()
 	if (sum == n)
 		printf("Graph is connected\n");
 	else printf("Graph is not connected");
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
-
-	// Dot file
-
-<<<<<<< HEAD
-	if ((file = fopen("Dot_file.txt", "w")) == NULL) {
-		printf("Cannot open file.\n");
-		exit(1);
-=======
-	
 	// Dot file
 	
 	if ((file = fopen("Dot_file.txt", "w")) == NULL) {		
 		printf("Cannot open file.\n");						
 		exit(1);											
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 	}
 	fprintf(file, "graph G{\n");
 
 
 	int t = -1;
 	ones_in_column = 0;
-<<<<<<< HEAD
-
 	int zero = 0;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < length; j++) {
@@ -184,14 +130,10 @@ int main()
 		zero = 0;
 	}
 
-	for (int j = 0; j < length; j++)
-	{
-		for (int i = 0; i < n; i++)
-=======
+	
 	for (int j = 0; j < length; j++)			
 	{
 		for (int i = 0; i < n; i++)				
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 		{
 			if ((a[i][j] == 1) && (ones_in_column > 2))
 
@@ -232,12 +174,7 @@ int main()
 	system("dot C:\\Projects\\DZ2\\Dot_file.txt -Tbmp -o Dot_file.bmp");
 	system("rundll32  \"%ProgramFiles%\\Windows Photo Viewer\\PhotoViewer.dll\", ImageView_Fullscreen C:\\Projects\\DZ2\\Dot_file.bmp");
 
-<<<<<<< HEAD
-
-	for (int i = 0; i < n; i++)
-=======
 	for (int i = 0; i < n; i++) 
->>>>>>> 3f078fd31e02f314cd3772d874a0fb2d59aaaee6
 	{
 		free(a[i]);
 	}
