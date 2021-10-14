@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include <bool.h>
 #pragma warning(disable : 4996)
 
 int main()
