@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-#define DEBUG 0
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
@@ -16,14 +15,14 @@ int main()
 	int i;
 	int j;
 	int n;
-	int length = 0;	// n - количество узлов, length - количество рёбер
+	int length = 0;	// n - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГіГ§Г«Г®Гў, length - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г°ВёГЎГҐГ°
 	int ones_in_column;                   
 	FILE* file;					
 	int sum = 1;
 
 	
-	//				  Ввод матрицы
-	printf("Введите количество узлов: ");
+	//				  Г‚ГўГ®Г¤ Г¬Г ГІГ°ГЁГ¶Г»
+	printf("Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГіГ§Г«Г®Гў: ");
 	scanf_s("%d", &n);	
 
 			
@@ -53,7 +52,7 @@ int main()
 	}
 	printf("\n\n");
 	
-	//Вывод  в консоль
+	//Г‚Г»ГўГ®Г¤  Гў ГЄГ®Г­Г±Г®Г«Гј
 
 	printf("\n\n   ");
 	printf(" ");
@@ -79,7 +78,7 @@ int main()
 		printf("\n");
 	}
 	
-	//связность
+	//Г±ГўГїГ§Г­Г®Г±ГІГј
 	
 	int* flag = (int*)malloc(n * sizeof(int));
 	flag[0] = 1;
@@ -111,12 +110,12 @@ int main()
 		}
 	}
 	if (sum == n)
-		printf("Граф связан\n");
-	else printf("Граф не связан");
+		printf("ГѓГ°Г Гґ Г±ГўГїГ§Г Г­\n");
+	else printf("ГѓГ°Г Гґ Г­ГҐ Г±ГўГїГ§Г Г­");
 
 
 	
-	// Работа с dot файлом
+	// ГђГ ГЎГ®ГІГ  Г± dot ГґГ Г©Г«Г®Г¬
 	
 	if ((file = fopen("Dot_file.txt", "w")) == NULL) {		
 		printf("Cannot open file.\n");						
@@ -134,7 +133,7 @@ int main()
 			if ((a[i][j] == 1) && (ones_in_column > 2))
 																	  
 			{
-				printf("Нельзя вводить больше 2 единицы в столбце");
+				printf("ГЌГҐГ«ГјГ§Гї ГўГўГ®Г¤ГЁГІГј ГЎГ®Г«ГјГёГҐ 2 ГҐГ¤ГЁГ­ГЁГ¶Г» Гў Г±ГІГ®Г«ГЎГ¶ГҐ");
 				exit(-1);
 			}
 			else
