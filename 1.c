@@ -12,8 +12,6 @@ int main()
 	system("cls");				
 	char cc;				
 	int k = 1;						
-	int i;
-	int j;
 	int n;
 	int length = 0;	//n - height, length - length
 	int ones_in_column;                   
@@ -32,7 +30,7 @@ int main()
 		a[arr] = (int*)malloc(sizeof(int));
 	}
 	cc = getchar();									
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		printf("%d  : ", i);
 		cc = getchar();								
@@ -62,16 +60,16 @@ int main()
 		printf("  %c", lit);
 	}
 	printf("\n");
-	for (j = 1; j <= ((3 * length) + 8); j++)
+	for (int j = 1; j <= ((3 * length) + 8); j++)
 	{
 		printf("-");
 	}
 	printf("\n");
 
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		printf("%i| ", (i + 1));
-		for (j = 0; j < length; j++)
+		for (int j = 0; j < length; j++)
 		{
 			printf("%3d", a[i][j]);
 		}
@@ -82,15 +80,15 @@ int main()
 	
 	int* flag = (int*)malloc(n * sizeof(int));
 	flag[0] = 1;
-	for (i = 1; i < n; i++)
+	for (int i = 1; i < n; i++)
 		flag[i] = 0;
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	{
 		
 		if (flag[i] == 1)
 		{
 			
-			for (j = 0; j < n; j++)
+			for (int j = 0; j < n; j++)
 			{
 				if (flag[j] != 1)
 				{
@@ -126,9 +124,9 @@ int main()
 
 	int t = -1;							    
 	ones_in_column = 0;
-	for (j = 0; j < length; j++)			
+	for (int j = 0; j < length; j++)			
 	{
-		for (i = 0; i < n; i++)				
+		for (int i = 0; i < n; i++)				
 		{
 			if ((a[i][j] == 1) && (ones_in_column > 2))
 																	  
@@ -170,7 +168,7 @@ int main()
 	system("rundll32  \"%ProgramFiles%\\Windows Photo Viewer\\PhotoViewer.dll\", ImageView_Fullscreen C:\\Projects\\DZ2\\Dot_file.bmp");
 	
 
-	for (i = 0; i < n; i++) 
+	for (int i = 0; i < n; i++) 
 	{
 		free(a[i]);
 	}
