@@ -15,14 +15,14 @@ int main()
 	int i;
 	int j;
 	int n;
-	int length = 0;	// n - êîëè÷åñòâî óçëîâ, length - êîëè÷åñòâî ð¸áåð
+	int length = 0;	//n - height, length - length
 	int ones_in_column;                   
 	FILE* file;					
 	int sum = 1;
 
 	
-	//				  Ââîä ìàòðèöû
-	printf("Ââåäèòå êîëè÷åñòâî óçëîâ: ");
+	//			Input
+	printf("Enter number of dots: ");
 	scanf_s("%d", &n);	
 
 			
@@ -52,7 +52,7 @@ int main()
 	}
 	printf("\n\n");
 	
-	//Âûâîä  â êîíñîëü
+	//Output the table
 
 	printf("\n\n   ");
 	printf(" ");
@@ -78,7 +78,7 @@ int main()
 		printf("\n");
 	}
 	
-	//ñâÿçíîñòü
+	//examine for connection
 	
 	int* flag = (int*)malloc(n * sizeof(int));
 	flag[0] = 1;
@@ -110,12 +110,12 @@ int main()
 		}
 	}
 	if (sum == n)
-		printf("Ãðàô ñâÿçàí\n");
-	else printf("Ãðàô íå ñâÿçàí");
+		printf("Graph is connected\n");
+	else printf("Graph is not connected");
 
 
 	
-	// Ðàáîòà ñ dot ôàéëîì
+	// Dot file
 	
 	if ((file = fopen("Dot_file.txt", "w")) == NULL) {		
 		printf("Cannot open file.\n");						
@@ -133,7 +133,7 @@ int main()
 			if ((a[i][j] == 1) && (ones_in_column > 2))
 																	  
 			{
-				printf("Íåëüçÿ ââîäèòü áîëüøå 2 åäèíèöû â ñòîëáöå");
+				printf("One edge cannot connect more than 2 graphs");
 				exit(-1);
 			}
 			else
